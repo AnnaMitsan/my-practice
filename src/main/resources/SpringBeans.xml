@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<bean id="boing" class="com.anna.app.Boing">
+		<constructor-arg value="1000" />
+	</bean>
+	<bean id="steve" class="com.anna.app.SteveJobs" />
+	<bean id="luxBoing" class="com.anna.app.LuxBoing">
+		<constructor-arg value="4000" />
+		<constructor-arg ref="steve" />
+	</bean>
+
+	<bean id="bomber" class="com.anna.app.Bomber">
+		<property name="bombs" value="20"></property>
+		<property name="bomberPilot" ref="Maria"></property>
+	</bean>
+
+	<bean id="Maria" class="com.anna.app.BomberWoman" />
+	<bean id="Igor" class="com.anna.app.BomberMan" />
+
+
+	<bean id="manyPilots" class="com.anna.app.ManyPilotsPlane">
+		<property name="bomberPilots">
+			<list>
+				<ref bean="Igor" />
+				<ref bean="Maria" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="manyPilotsNew" class="com.anna.app.ManyPilotsPlaneNew">
+		<property name="bomberPilots">
+			<map>
+				<entry key="IGOR" value-ref="Igor" />
+				<entry key="MARIA" value-ref="Maria" />
+			</map>
+		</property>
+	</bean>
+
+</beans>
