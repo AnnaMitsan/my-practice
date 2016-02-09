@@ -1,42 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd">
+		
+	<context:component-scan base-package="com.anna.app.components">
+		<context:include-filter type="annotation"
+			expression="com.anna.app.BomberPilot" />
+	</context:component-scan>
+
 
 	<bean id="boing" class="com.anna.app.Boing">
 		<constructor-arg value="1000" />
 	</bean>
 	<bean id="steve" class="com.anna.app.SteveJobs" />
-	<bean id="luxBoing" class="com.anna.app.LuxBoing">
+	<bean id="luxBoing" class="com.anna.app.LuxBoing" autowire="constructor">
 		<constructor-arg value="4000" />
-		<constructor-arg ref="steve" />
 	</bean>
 
-	<bean id="bomber" class="com.anna.app.Bomber">
+	<bean id="bomber" class="com.anna.app.Bomber" autowire="byName">
 		<property name="bombs" value="20"></property>
-		<property name="bomberPilot" ref="Maria"></property>
 	</bean>
 
-	<bean id="Maria" class="com.anna.app.BomberWoman" />
-	<bean id="Igor" class="com.anna.app.BomberMan" />
-
-
-	<bean id="manyPilots" class="com.anna.app.ManyPilotsPlane">
-		<property name="bomberPilots">
-			<list>
-				<ref bean="Igor" />
-				<ref bean="Maria" />
-			</list>
-		</property>
-	</bean>
-
-	<bean id="manyPilotsNew" class="com.anna.app.ManyPilotsPlaneNew">
-		<property name="bomberPilots">
-			<map>
-				<entry key="IGOR" value-ref="Igor" />
-				<entry key="MARIA" value-ref="Maria" />
-			</map>
-		</property>
-	</bean>
+	<bean id="bomberPilot" class="com.anna.app.BomberWoman" />
 
 </beans>
